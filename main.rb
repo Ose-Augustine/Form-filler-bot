@@ -14,9 +14,15 @@ def bot
     # All questions have the same class_name
     questions = driver.find_elements(:class_name, "M7eMe")
     input_fields = driver.find_elements(:css, ".whsOnd.zHQkBf")
+    radio_labels = driver.find_elements(:css, ".docssharedWizToggleLabeledContainer.ajBQVb")
     title = driver.title
 
+    p input_fields.length 
+    p radio_labels.length 
+
     driver.quit
+
+
 end 
 
 bot()
