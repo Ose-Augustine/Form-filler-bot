@@ -11,10 +11,10 @@ def bot
 
     driver.navigate.to "https://docs.google.com/forms/d/e/1FAIpQLScRWyqpgDXKHu6pV1wEhewUIEnrHiiTnvQFgJ8SLtiGx7EebQ/viewform"
 
-    #biggest = driver.find_element(:class_name, "F9yp7e")
+    # All questions have the same class_name
+    questions = driver.find_elements(:class_name, "M7eMe")
+    input_fields = driver.find_elements(:css, ".whsOnd.zHQkBf")
     title = driver.title
-
-    p title 
 
     driver.quit
 end 
