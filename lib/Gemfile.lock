@@ -1,6 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    concurrent-ruby (1.2.2)
+    faker (3.2.0)
+      i18n (>= 1.8.11, < 2)
+    i18n (1.13.0)
+      concurrent-ruby (~> 1.0)
     nokogiri (1.14.3-x64-mingw-ucrt)
       racc (~> 1.4)
     racc (1.6.2)
@@ -20,6 +25,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  faker
   webdrivers (~> 5.0)
 
 RUBY VERSION
