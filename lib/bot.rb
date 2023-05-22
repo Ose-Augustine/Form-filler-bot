@@ -14,9 +14,16 @@ class Bot
             nodes << node.text 
         end
         p nodes
-        driver.quit
+        @@driver.quit
     end
+
+    def find_input_fields 
+        fields = @@driver.find_elements(:xpath, "//input[@type='text']")
+        @@driver.quit
+        fields 
+    end 
 end
 
 robot = Bot.new 
-robot.questions_with_input_fields('What is your name?')
+#robot.questions_with_input_fields('What is your name?')
+inputs = robot.find_input_fields
