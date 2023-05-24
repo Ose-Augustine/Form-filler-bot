@@ -3,8 +3,8 @@ require 'webdrivers'
 require 'faker'
 
 class Bot 
-    @@options = Selenium::WebDriver::Chrome::Options.new(args:['headless'])
-    @@driver = Selenium::WebDriver.for(:chrome, options: @@options)
+    @@options = Selenium::WebDriver::Edge::Options.new(args:['headless'])
+    @@driver = Selenium::WebDriver.for(:edge, options: @@options)
     @@wait = Selenium::WebDriver::Wait.new(timeout: 100)
     @@driver.navigate.to "https://docs.google.com/forms/d/e/1FAIpQLScRWyqpgDXKHu6pV1wEhewUIEnrHiiTnvQFgJ8SLtiGx7EebQ/viewform"
 
@@ -20,7 +20,6 @@ class Bot
 
     def find_input_fields 
         fields = @@driver.find_elements(:xpath, "//input[@type='text']")
-        @@driver.quit
         fields 
     end 
 
@@ -53,11 +52,18 @@ class Bot
                 random = rand(10)
                 data << random
             else
+                p "#{element} not supported"
                 p"Watch out for more data support"
             end 
         end
         return data
     end
+
+    def interact_with_input_fields(fields, sample_data) 
+        fields.zip(sample_data).each do |field, data|
+            field.send_keys data
+        end 
+    end 
 
     def find_next_or_submit_button
         # button = @@wait.until {@@driver.find_element(:css, ".NPEfkd.RveJvd.snByac")}
@@ -75,10 +81,10 @@ class Bot
 end 
 
 robot = Bot.new 
-p robot.find_next_or_submit_button.text 
-p robot.find_radio_parent
 #robot.questions_with_input_fields('What is your name?')
 input_fields = robot.find_input_fields 
-data_types = robot.propmt_field_data_type(3) 
+data_types = robot.propmt_field_data_type(4) 
 fake_data = robot.generate_fake_with_prompts(data_types) 
 p fake_data
+robot.interact_with_input_fields(input_fields, fake_data)
+robot.find_next_or_submit_button.click
