@@ -29,6 +29,7 @@ class Bot
     def propmt_field_data_type(number_of_fields)
         p 'What kind of data are you expecting'
         p 'E.g country, number, email address'
+        p 'Please write in the order you expect them'
         data = []
         number_of_fields.times do 
             p "This would ask you #{number_of_fields} time(s)"
@@ -44,6 +45,10 @@ class Bot
             case element
             when "country"
                 data << Faker::Nation.nationality
+            when "name"
+                data << Faker::Name.name 
+            when "food" 
+                data << Faker::Food.allergen
             when "number" 
                 random = rand(10)
                 data << random
@@ -73,7 +78,7 @@ robot = Bot.new
 p robot.find_next_or_submit_button.text 
 p robot.find_radio_parent
 #robot.questions_with_input_fields('What is your name?')
-#inputs = robot.find_input_fields 
-# data_types = propmt_field_data_type(2) 
-# fake_data = generate_fake_with_prompts(data_types) 
-# p fake_data
+input_fields = robot.find_input_fields 
+data_types = robot.propmt_field_data_type(3) 
+fake_data = robot.generate_fake_with_prompts(data_types) 
+p fake_data
