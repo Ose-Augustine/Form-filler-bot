@@ -2,3 +2,4 @@
 2. propmt the user to tell us the questions that have input fields
 3. Use relative xpath to find that node with the text 
 4. Find all the input fields themselves
+5. locate a next or submit button
